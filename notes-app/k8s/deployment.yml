@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notes-app-deployment
+  namespace: notes-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notes-app
+  template:
+    metadata:
+      labels:
+        app: notes-app
+    spec:
+      containers:
+      - name: notes-app
+        image: ojasjawale/notes-app:latest
+        ports:
+        - containerPort: 8000
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 200m
+        volumeMounts:
+        - name: notes-app-storage
+          mountPath: /data  # This is the directory inside the container where the volume will be mounted
+      volumes:
+      - name: notes-app-storage
+        persistentVolumeClaim:
+          claimName: notes-app-pvc
+

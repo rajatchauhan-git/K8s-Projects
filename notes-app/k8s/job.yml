@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: notes-app-job
+  namespace: notes-app
+spec:
+  template:
+    spec:
+      containers:
+      - name: notes-app-job
+        image: ojasjawale/notes-app:latest
+        ports:
+        - containerPort: 8000
+      restartPolicy: OnFailure

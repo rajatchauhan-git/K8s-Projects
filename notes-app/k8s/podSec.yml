@@ -1,0 +1,20 @@
+apiVersion: policy/v1
+kind: PodSecurityPolicy
+metadata:
+  name: notes-app-psp
+spec:
+  privileged: false
+  capabilities:
+    add: []
+  volumes:
+    - "emptyDir"
+    - "projected"
+    - "secret"
+    - "configMap"
+  hostNetwork: false
+  hostIPC: false
+  hostPID: false
+  containers:
+    - allowPrivilegeEscalation: false
+      allowPrivilegeEscalation: false
+      readOnlyRootFilesystem: true
